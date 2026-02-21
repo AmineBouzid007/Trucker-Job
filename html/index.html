@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trucker Job Demo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="images/yt.png">
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+    <div class="main">
+        <div class="sidebar">
+            <div class="nav-item active" data-page="jobsPage">
+                <i class="fa-solid fa-list-ul"></i>
+                <span>JOBS</span>
+            </div>
+            <div class="nav-item" data-page="convoyPage">
+                <i class="fa-solid fa-users"></i>
+                <span>CONVOY</span>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="topWrapper">
+                <div class="topWrapper-jobName">
+                    <div class="iconLogo"><i class="fa-solid fa-truck"></i></div>
+                    <div class="jobText">TRUCKER JOB</div>
+                    <div class="playerName">Player: <span id="playerName">Loading...</span></div>
+                </div>
+
+                <div class="rightTopWrapper">
+                    <div class="topWrapper-close">
+                        <div class="closeText">Close</div>
+                        <div class="closeIcon red-x-btn">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    </div>
+
+                    <div class="level">
+                        <div class="levelText">Level 1 — 0/100</div>
+                        <div class="levelProg"><div class="levelStatus"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="jobsPage" class="page-container">
+                <div class="filter">
+                    <div class="filterMenu">
+                        <div class="menu">
+                            <p>Filter By...</p>
+                            <div class="menu-items">
+                                <div class="item" id="asc">Increasing price</div>
+                                <div class="item" id="desc">Declining price</div>
+                                <div class="item" id="farthest">Farthest distance</div>
+                                <div class="item" id="shortest">Shortest distance</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="searchTrailer">
+                        <div class="inputArea">
+                            <input type="text" id="trailerInput" placeholder="Search Trailer...">
+                        </div>
+                        <div class="inputIcon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="listArea">
+                    </div>
+            </div>
+
+            <div id="convoyPage" class="page-container" style="display: none;">
+                <div id="convoyAuth" class="convoy-grid">
+                    <div class="convoy-box">
+                        <div class="trailerName">HOST CONVOY</div>
+                        <p class="trailerType">Generate a session for your team</p>
+                        <div id="generatedID" class="trailerPrice" style="font-size: 2.2vw; margin: 20px 0;">----</div>
+                        <div id="createConvoyBtn" class="confirm">GENERATE ID</div>
+                    </div>
+
+                    <div class="convoy-box">
+                        <div class="trailerName">JOIN CONVOY</div>
+                        <p class="trailerType">Enter the code to sync route</p>
+                        <input type="number" class="convoy-input-field" id="joinIDInput" oninput="if(this.value.length > 4) this.value = this.value.slice(0, 4);" placeholder="ENTER ID">
+                        <div id="joinConvoyBtn" class="confirm" style="box-shadow: 0 0 15px var(--accent-glow);">JOIN SESSION</div>
+                    </div>
+                </div>
+
+                <div id="convoyLobby" style="display: none;">
+                    <div class="lobby-header">
+                        <div class="lobby-title">SESSION ID: <span id="activeConvoyID" style="color:var(--accent)">#0000</span></div>
+                        <div id="leaveConvoyBtn" class="leave-btn">LEAVE SESSION</div>
+                    </div>
+
+                    <div class="lobby-content">
+                        <div class="lobby-panel">
+                            <div class="panel-header"><i class="fa-solid fa-id-card"></i> CREW MEMBERS</div>
+                            <div id="playerList" class="player-scroll">
+                                </div>
+                            <div class="invite-section">
+                                <input type="number" id="invitePlayerID" class="convoy-input-field" style="margin:0; width: 100%; text-align: left; padding-left: 15px;" placeholder="Server ID...">
+                                <div id="sendInviteBtn" class="invite-btn">INVITE</div>
+                            </div>
+                        </div>
+
+                        <div class="lobby-panel">
+                            <div class="panel-header"><i class="fa-solid fa-route"></i> CURRENT MISSION</div>
+                            <div id="lobbyMissionInfo" class="mission-details" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; opacity: 0.5;">
+                                <i class="fa-solid fa-clock-rotate-left" style="font-size: 3vw; margin-bottom: 15px;"></i>
+                                <div class="no-mission" style="font-family: var(--font-header); letter-spacing: 1px;">WAITING FOR LEADER...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="popUp">
+        <div class="popUpText">Confirm Job?</div>
+        <div class="popUpButtons">
+            <div id="cancel"><span>Cancel</span></div>
+            <div id="confirm">CONFIRM</div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
